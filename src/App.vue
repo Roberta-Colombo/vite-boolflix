@@ -19,32 +19,66 @@ export default {
   data() {
     return {
       store,
-      endPoint: "search/movie",
+      // elementi che compongono l'api
+      endPointMovie: "/search/movie",
+      endPointShow: "/search/tv",
       apiKey: "?api_key=843403d86580a9c697c8a3e94798c648",
       apiQuery: "&query=",
       apiLanguage: "&language=it-IT",
     };
   },
+  // costruzione delle due api
+  computed: {
+    apiMovie() {
+      return (
+        store.apiURL +
+        this.endPointMovie +
+        this.apiKey +
+        this.apiQuery +
+        store.searchedTitle +
+        this.apiLanguage
+      );
+    },
+    apiTvShow() {
+      return (
+        store.apiURL +
+        this.endPointShow +
+        this.apiKey +
+        this.apiQuery +
+        store.searchedTitle +
+        this.apiLanguage
+      );
+    },
+  },
   methods: {
+    // func per mostrare film che risp ai criteri di ricerca
     getTitles() {
-      let options = null;
-      if (store.search.title) {
-        options = {
+      let optionsMovie = null;
+      if (store.searchedTitle) {
+        optionsMovie = {
           params: {
-            title: store.search.title,
+            title: store.searchedTitle,
           },
         };
       }
-      const movieApi =
-        store.apiURL +
-        this.endPoint +
-        this.apiKey +
-        this.apiQuery +
-        this.store.search.title +
-        this.apiLanguage;
-      axios.get(movieApi, options).then((res) => {
+      axios.get(this.apiMovie, optionsMovie).then((res) => {
         store.movieList = res.data.results;
         console.log(store.movieList);
+      });
+
+      // func per mostrare serie TV che risp ai criteri di ricerca
+      let optionsTvShow = null;
+      if (store.searchedTitle) {
+        optionsTvShow = {
+          params: {
+            name: store.searchedTitle,
+          },
+        };
+      }
+
+      axios.get(this.apiTvShow, optionsTvShow).then((res) => {
+        store.tvShowList = res.data.results;
+        console.log(store.tvShowList);
       });
     },
   },

@@ -8,9 +8,10 @@
           type="text"
           id="search-title"
           placeholder="Search title..."
-          v-model.trim="store.search.title"
+          v-model.trim="store.searchedTitle"
         />
-        <button type="submit" @click="searchTitles">Search</button>
+
+        <button type="submit" @click="search">Search</button>
       </div>
     </div>
   </div>
@@ -27,7 +28,7 @@ export default {
     };
   },
   methods: {
-    searchTitles() {
+    search() {
       this.$emit("filteredTitles");
     },
   },

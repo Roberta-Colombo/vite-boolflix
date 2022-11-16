@@ -1,14 +1,17 @@
 <template>
   <div>
-    <h4>{{ searchResult.title }}</h4>
-    <div>{{ searchResult.original_title }}</div>
-    <div>{{ searchResult.original_language }}</div>
+    <h4>{{ searchResult.title || searchResult.name }}</h4>
+    <div>{{ searchResult.original_title || searchResult.original_name }}</div>
+    <img
+      :src="`/flags/4x3/${searchResult.original_language}.svg`"
+      :alt="searchResult.original_language"
+    />
     <div>{{ searchResult.vote_average }}</div>
   </div>
 </template>
 
 <script>
-import { store } from "../store";
+// import { store } from "../store";
 
 export default {
   name: "CardComponent",
@@ -18,4 +21,9 @@ export default {
 };
 </script>
 
-<style lang="scss" scoped></style>
+<style lang="scss" scoped>
+img {
+  height: 20px;
+  width: 40px;
+}
+</style>
