@@ -51,8 +51,9 @@ export default {
     },
   },
   methods: {
-    // func per mostrare film che risp ai criteri di ricerca
+    // func per mostrare film e serie che risp ai criteri di ricerca
     getTitles() {
+      // chiamata api per i film
       let optionsMovie = null;
       if (store.searchedTitle) {
         optionsMovie = {
@@ -66,7 +67,7 @@ export default {
         console.log(store.movieList);
       });
 
-      // func per mostrare serie TV che risp ai criteri di ricerca
+      // chiamata api per le serie tv
       let optionsTvShow = null;
       if (store.searchedTitle) {
         optionsTvShow = {
