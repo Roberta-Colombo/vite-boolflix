@@ -1,7 +1,7 @@
 <template>
   <div class="header">
     <div class="my-container d-flex justify-content-between align-items-center">
-      <div class="logo">BOOLFIX</div>
+      <div class="logo">BOOLFLIX</div>
 
       <div class="searchbar">
         <input
@@ -11,7 +11,7 @@
           v-model.trim="store.searchedTitle"
         />
 
-        <button type="submit" @click="search">Search</button>
+        <button @click="search">Search</button>
       </div>
     </div>
   </div>
