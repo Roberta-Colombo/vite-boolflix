@@ -4,7 +4,7 @@
       <div class="flip-card-front">
         <!-- poster film/serie + placeholder in caso di img mancante-->
         <img
-          class="poster"
+          class="poster img-fluid"
           :src="
             searchResult.poster_path
               ? imgBasePath + searchResult.poster_path
@@ -342,7 +342,8 @@ export default {
 }
 
 .poster {
-  width: 100%;
+  max-width: 100%;
+  height: 100%;
 }
 
 .overview {

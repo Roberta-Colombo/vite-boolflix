@@ -19,67 +19,31 @@ export default {
   data() {
     return {
       store,
-      // elementi che compongono l'api
-      endPointMovie: "/search/movie",
-      endPointShow: "/search/tv",
-      apiKey: "?api_key=843403d86580a9c697c8a3e94798c648",
-      apiQuery: "&query=",
-      apiLanguage: "&language=it-IT",
     };
-  },
-  // costruzione delle due api
-  computed: {
-    apiMovie() {
-      return (
-        store.apiURL +
-        this.endPointMovie +
-        this.apiKey +
-        this.apiQuery +
-        store.searchedTitle +
-        this.apiLanguage
-      );
-    },
-    apiTvShow() {
-      return (
-        store.apiURL +
-        this.endPointShow +
-        this.apiKey +
-        this.apiQuery +
-        store.searchedTitle +
-        this.apiLanguage
-      );
-    },
   },
   methods: {
     // func per mostrare film e serie che risp ai criteri di ricerca
     getTitles() {
+      // passaggio dei parametri tramite options obj
+      let options = null;
+      options = {
+        params: {
+          api_key: "843403d86580a9c697c8a3e94798c648",
+          query: store.searchedTitle,
+          language: "it-IT",
+        },
+      };
+
       // chiamata api per i film
-      let optionsMovie = null;
-      if (store.searchedTitle) {
-        optionsMovie = {
-          params: {
-            title: store.searchedTitle,
-          },
-        };
-      }
-      axios.get(this.apiMovie, optionsMovie).then((res) => {
+      const apiurlMovie = store.baseURL + store.endpoint.movie;
+      axios.get(apiurlMovie, options).then((res) => {
         store.movieList = res.data.results;
-        console.log(store.movieList);
       });
 
-      // chiamata api per le serie tv
-      let optionsTvShow = null;
-      if (store.searchedTitle) {
-        optionsTvShow = {
-          params: {
-            name: store.searchedTitle,
-          },
-        };
-      }
-
-      axios.get(this.apiTvShow, optionsTvShow).then((res) => {
+      // chiamata api per le serie
+      const apiurlTvShow = store.baseURL + store.endpoint.tvShow;
+      axios.get(apiurlTvShow, options).then((res) => {
         store.tvShowList = res.data.results;
-        console.log(store.tvShowList);
       });
     },
   },
