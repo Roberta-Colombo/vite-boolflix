@@ -9,9 +9,12 @@
           id="search-title"
           placeholder="Search title..."
           v-model.trim="store.searchedTitle"
+          @keyup.enter="search"
         />
 
-        <button @click="search">Search</button>
+        <button @click="search">
+          <i class="fa-solid fa-magnifying-glass"></i>
+        </button>
       </div>
     </div>
   </div>
@@ -48,5 +51,24 @@ export default {
 
 .logo {
   color: red;
+  font-size: 2rem;
+  letter-spacing: 0.25rem;
+  font-weight: 500;
+}
+
+button {
+  background-color: transparent;
+  border-style: none;
+  padding-left: 0.5rem;
+}
+
+i {
+  color: $white;
+  font-size: 1.4rem;
+}
+
+input {
+  background-color: $cardblack;
+  color: $white;
 }
 </style>

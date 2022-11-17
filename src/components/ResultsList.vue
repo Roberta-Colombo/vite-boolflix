@@ -1,18 +1,30 @@
 <template>
   <section class="movies">
-    <h2>FILM</h2>
     <div class="my-container">
-      <div v-for="(item, index) in store.movieList" :key="index">
-        <CardComponent :searchResult="item" />
+      <h2>FILM</h2>
+      <div class="row">
+        <div
+          class="col-12 col-sm-6 col-md-4 col-lg-3 my-5"
+          v-for="(item, index) in store.movieList"
+          :key="index"
+        >
+          <CardComponent :searchResult="item" />
+        </div>
       </div>
     </div>
   </section>
 
   <section class="tv-shows">
-    <h2>SERIE TV</h2>
     <div class="my-container">
-      <div v-for="(item, index) in store.tvShowList" :key="index">
-        <CardComponent :searchResult="item" />
+      <h2>SERIE TV</h2>
+      <div class="row">
+        <div
+          class="col-12 col-sm-6 col-md-4 col-lg-3 my-5"
+          v-for="(item, index) in store.tvShowList"
+          :key="index"
+        >
+          <CardComponent :searchResult="item" />
+        </div>
       </div>
     </div>
   </section>
@@ -33,4 +45,17 @@ export default {
 };
 </script>
 
-<style lang="scss" scoped></style>
+<style lang="scss" scoped>
+@use "../assets/styles/partials/variables" as *;
+
+.row {
+  height: 100vh;
+  flex-wrap: nowrap;
+  overflow-x: auto;
+}
+
+h2 {
+  margin-top: 40px;
+  color: $white;
+}
+</style>

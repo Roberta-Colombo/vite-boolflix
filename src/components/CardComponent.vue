@@ -1,36 +1,58 @@
 <template>
-  <div>
-    <img
-      :src="
-        searchResult.poster_path
-          ? imgBasePath + searchResult.poster_path
-          : 'https://via.placeholder.com/342x513/CCCCCC/FFFFFF.jpg?text=No+image+available'
-      "
-      :alt="searchResult.original_title || searchResult.original_name + 'image'"
-    />
+  <div class="flip-card">
+    <div class="flip-card-inner">
+      <div class="flip-card-front">
+        <!-- poster film/serie + placeholder in caso di img mancante-->
+        <img
+          class="poster"
+          :src="
+            searchResult.poster_path
+              ? imgBasePath + searchResult.poster_path
+              : 'https://via.placeholder.com/342x513/CCCCCC/FFFFFF.jpg?text=No+image+available'
+          "
+          :alt="
+            searchResult.original_title || searchResult.original_name + 'image'
+          "
+        />
+      </div>
 
-    <h4>{{ searchResult.title || searchResult.name }}</h4>
-    <div>{{ searchResult.original_title || searchResult.original_name }}</div>
+      <div class="flip-card-back">
+        <!-- titolo film/serie: prima in italiano poi titolo originale -->
+        <h4 class="my-4">{{ searchResult.title || searchResult.name }}</h4>
+        <div class="my-3">
+          {{ searchResult.original_title || searchResult.original_name }}
+        </div>
 
-    <img
-      class="flag"
-      v-if="this.availableFlags.includes(searchResult.original_language)"
-      :src="`/flags/4x3/${searchResult.original_language}.svg`"
-      :alt="searchResult.original_language"
-    />
+        <!-- bandierina della lingua originale -->
+        <img
+          class="flag"
+          v-if="this.availableFlags.includes(searchResult.original_language)"
+          :src="`/flags/4x3/${searchResult.original_language}.svg`"
+          :alt="searchResult.original_language"
+        />
 
-    <img
-      class="unknown-flag"
-      v-else
-      src="/flags/4x3/unknown1.png"
-      alt="Country flag not available"
-    />
+        <!-- bandierina di default in caso di img mancante -->
+        <img
+          class="unknown-flag"
+          v-else
+          src="/flags/4x3/unknown1.png"
+          alt="Country flag not available"
+        />
+        <br />
 
-    <span
-      v-for="n in 5"
-      class="fa-star"
-      :class="n <= rating ? 'fa-solid' : 'fa-regular'"
-    ></span>
+        <!-- valutazione in stelline -->
+        <div
+          v-for="n in 5"
+          class="fa-star"
+          :class="n <= rating ? 'fa-solid' : 'fa-regular'"
+        ></div>
+
+        <!-- riassunto film/serie -->
+        <div class="overview">
+          {{ searchResult.overview }}
+        </div>
+      </div>
+    </div>
   </div>
 </template>
 
@@ -305,14 +327,67 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+@use "../assets/styles/partials/variables" as *;
 .flag {
   height: 25px;
   width: 50px;
+  margin: 15px 0;
 }
 
 .unknown-flag {
   height: 25px;
   width: 42px;
   padding-left: 0.4rem;
+  margin: 15px 0;
+}
+
+.poster {
+  width: 100%;
+}
+
+.overview {
+  font-size: 0.9rem;
+  text-align: justify;
+  margin: 20px 20px;
+}
+
+// Layout effetto flip-card
+.flip-card {
+  background-color: transparent;
+  width: 342px;
+  height: 513px;
+  perspective: 1000px;
+}
+
+/* This container is needed to position the front and back side */
+.flip-card-inner {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  text-align: center;
+  transition: transform 0.8s;
+  transform-style: preserve-3d;
+}
+
+/* Do an horizontal flip when you move the mouse over the flip box container */
+.flip-card:hover .flip-card-inner {
+  transform: rotateY(180deg);
+}
+
+/* Position the front and back side */
+.flip-card-front,
+.flip-card-back {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  -webkit-backface-visibility: hidden; /* Safari */
+  backface-visibility: hidden;
+}
+
+/* Style the back side */
+.flip-card-back {
+  background-color: $cardblack;
+  color: white;
+  transform: rotateY(180deg);
 }
 </style>
