@@ -1,30 +1,38 @@
 <template>
-  <section class="movies">
+  <section class="popular-movies">
     <div class="my-container">
-      <h2>Film che corrispondono alla tua ricerca</h2>
+      <h2>I film pi&ugrave; popolari su Boolflix</h2>
       <div ref="box" class="row g-0">
         <button class="left-btn" @click="scrollLftMovie">
           <i class="fa-solid fa-angle-left"></i>
         </button>
-        <div class="col" v-for="(item, index) in store.movieList" :key="index">
-          <CardComponent :searchResult="item" />
+        <div
+          class="col"
+          v-for="(item, index) in store.popularMovieList"
+          :key="index"
+        >
+          <CardPopularMovie :popularMovieList="item" />
         </div>
-        <button class="right-btn" @click="scrollRgtMovie">
-          <i class="fa-solid fa-angle-right"></i>
-        </button>
       </div>
+      <button class="right-btn" @click="scrollRgtMovie">
+        <i class="fa-solid fa-angle-right"></i>
+      </button>
     </div>
   </section>
 
-  <section class="tv-shows">
+  <section class="popular-tvshows">
     <div class="my-container">
-      <h2>Serie che corrispondono alla tua ricerca</h2>
+      <h2>Le serie pi&ugrave; popolari su Boolflix</h2>
       <div ref="box2" class="row g-0">
         <button class="left-btn" @click="scrollLftShow">
           <i class="fa-solid fa-angle-left"></i>
         </button>
-        <div class="col" v-for="(item, index) in store.tvShowList" :key="index">
-          <CardComponent :searchResult="item" />
+        <div
+          class="col"
+          v-for="(item, index) in store.popularTvShowList"
+          :key="index"
+        >
+          <CardPopularShow :popularTvShowList="item" />
         </div>
       </div>
       <button class="right-btn" @click="scrollRgtShow">
@@ -36,16 +44,17 @@
 
 <script>
 import { store } from "../store";
-import CardComponent from "./CardComponent.vue";
+import CardPopularMovie from "./CardPopularMovie.vue";
+import CardPopularShow from "./CardPopularShow.vue";
 
 export default {
-  name: "ResultsList",
+  name: "HomeComponent",
+  components: { CardPopularMovie, CardPopularShow },
   data() {
     return {
       store,
     };
   },
-  components: { CardComponent },
   methods: {
     scrollLftMovie() {
       const element = this.$refs.box;

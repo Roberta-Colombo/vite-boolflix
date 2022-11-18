@@ -1,0 +1,70 @@
+@use "./variables" as *;
+
+section {
+  margin-bottom: 80px;
+}
+.row {
+  padding-bottom: 80px;
+  flex-wrap: nowrap;
+  overflow-y: hidden;
+  overflow-x: auto;
+}
+.col {
+  flex-basis: calc(100% / 6);
+}
+h2 {
+  margin-top: 40px;
+  margin-bottom: 30px;
+  color: $white;
+}
+
+button {
+  width: 50px;
+  height: 50px;
+  position: absolute;
+  z-index: 1000;
+  top: 68px;
+  background-color: $transblack;
+  height: 513px;
+  border-style: none;
+}
+
+.left-btn {
+  left: 0;
+}
+
+.right-btn {
+  right: 0;
+}
+
+i {
+  color: $white;
+  font-size: 3rem;
+}
+
+// Custom scrollbar
+// Scrollbar 
+::-webkit-scrollbar {
+    width: 12px;
+    height: 5px;
+}
+ 
+// Track 
+::-webkit-scrollbar-track {
+    -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3); 
+    width: 5px;
+    -webkit-border-radius: 2px;
+    border-radius: 2px;
+}
+ 
+// Handle 
+::-webkit-scrollbar-thumb {
+    -webkit-border-radius: 2px;
+    border-radius: 2px;
+    background: rgba(255,0,0,0.8); 
+    width: 5px;
+    -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.5); 
+}
+::-webkit-scrollbar-thumb:window-inactive {
+	background: rgba(255,0,0,0.4); 
+}

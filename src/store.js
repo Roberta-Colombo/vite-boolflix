@@ -5,8 +5,13 @@ export const store = reactive({
   endpoint: {
     movie: "/search/movie",
     tvShow: "/search/tv",
+    popularMovie: "/movie/popular",
+    popularTvShow: "/tv/popular",
   },
   movieList: [],
   tvShowList: [],
+  popularMovieList: [],
+  popularTvShowList: [],
   searchedTitle: "",
+  showHome: true,
 });

@@ -6,11 +6,11 @@
 
         <ul class="d-flex mt-3">
           <li><a href="#">Home</a></li>
-          <li><a href="#">TV Shows</a></li>
-          <li><a href="#">Movies</a></li>
-          <li><a href="#">New & Popular</a></li>
-          <li><a href="#">My List</a></li>
-          <li><a href="#">Browse by Languages</a></li>
+          <li><a href="#">Serie TV</a></li>
+          <li><a href="#">Film</a></li>
+          <li><a href="#">Nuovi e popolari</a></li>
+          <li><a href="#">La mia lista</a></li>
+          <li><a href="#">Sfoglia per lingua</a></li>
         </ul>
       </nav>
 
@@ -29,7 +29,7 @@
           <i class="fa-solid fa-magnifying-glass p-1"></i>
         </button>
 
-        <div class="px-3"><a href="#">Kids</a></div>
+        <div class="px-3"><a href="#">Bambini</a></div>
         <i class="p-2 fa-regular fa-bell"></i>
         <i class="p-3 fa-regular fa-user"></i>
       </div>

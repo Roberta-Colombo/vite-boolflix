@@ -2,33 +2,35 @@
   <div class="flip-card">
     <div class="flip-card-inner">
       <div class="flip-card-front">
-        <!-- poster film/serie + placeholder in caso di img mancante-->
+        <!-- poster film/serie + placeholder in caso di img mancante -->
         <img
           class="poster img-fluid"
           :src="
-            searchResult.poster_path
-              ? imgBasePath + searchResult.poster_path
+            popularTvShowList.poster_path
+              ? imgBasePath + popularTvShowList.poster_path
               : 'https://via.placeholder.com/342x513/CCCCCC/FFFFFF.jpg?text=No+image+available'
           "
-          :alt="
-            searchResult.original_title || searchResult.original_name + 'image'
-          "
+          :alt="popularTvShowList.original_name + 'image'"
         />
       </div>
 
       <div class="flip-card-back">
         <!-- titolo film/serie: prima in italiano poi titolo originale -->
-        <h4 class="my-4">{{ searchResult.title || searchResult.name }}</h4>
+        <h4 class="my-4">
+          {{ popularTvShowList.name }}
+        </h4>
         <div class="my-3">
-          {{ searchResult.original_title || searchResult.original_name }}
+          {{ popularTvShowList.original_name }}
         </div>
 
         <!-- bandierina della lingua originale -->
         <img
           class="flag"
-          v-if="this.availableFlags.includes(searchResult.original_language)"
-          :src="`/flags/4x3/${searchResult.original_language}.svg`"
-          :alt="searchResult.original_language"
+          v-if="
+            this.availableFlags.includes(popularTvShowList.original_language)
+          "
+          :src="`/flags/4x3/${popularTvShowList.original_language}.svg`"
+          :alt="popularTvShowList.original_language"
         />
 
         <!-- bandierina di default in caso di img mancante -->
@@ -49,7 +51,7 @@
 
         <!-- riassunto film/serie -->
         <div class="overview">
-          {{ searchResult.overview }}
+          {{ popularTvShowList.overview }}
         </div>
       </div>
     </div>
@@ -60,7 +62,7 @@
 export default {
   name: "CardComponent",
   props: {
-    searchResult: Object,
+    popularTvShowList: Object,
   },
   data() {
     return {
@@ -320,7 +322,7 @@ export default {
   },
   computed: {
     rating() {
-      return Math.ceil(this.searchResult.vote_average / 2);
+      return Math.ceil(this.popularTvShowList.vote_average / 2);
     },
   },
 };
