@@ -2,7 +2,7 @@
   <div class="header">
     <div class="my-container d-flex justify-content-between align-items-center">
       <nav class="d-flex justify-content-between align-items-center">
-        <div class="logo">BOOLFLIX</div>
+        <button class="logo" @click="resetSearch">BOOLFLIX</button>
 
         <ul class="d-flex mt-3">
           <li><a href="#">Home</a></li>
@@ -50,6 +50,10 @@ export default {
   methods: {
     search() {
       this.$emit("filteredTitles");
+    },
+    resetSearch() {
+      store.searchedTitle = "";
+      store.showHome = true;
     },
   },
 };

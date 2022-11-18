@@ -14,4 +14,12 @@ export const store = reactive({
   popularTvShowList: [],
   searchedTitle: "",
   showHome: true,
+  loading: {
+    movie: false,
+    tvShow: false,
+  },
+  errorMessage: {
+    movie: false,
+    tvShow: false,
+  },
 });

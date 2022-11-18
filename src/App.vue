@@ -40,15 +40,37 @@ export default {
 
       // chiamata api per i film
       const apiurlMovie = store.baseURL + store.endpoint.movie;
-      axios.get(apiurlMovie, options).then((res) => {
-        store.movieList = res.data.results;
-      });
+      store.loading.movie = true;
+      axios
+        .get(apiurlMovie, options)
+        .then((res) => {
+          store.movieList = res.data.results;
+          console.log(store.movieList.length);
+          store.loading.movie = false;
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+
+      // Da correggere:
+      if ((store.movieList.length = 0)) {
+        store.errorMessage.movie = true;
+        console.log(store.movieList.length);
+        console.log("nessun risultato");
+      }
 
       // chiamata api per le serie
       const apiurlTvShow = store.baseURL + store.endpoint.tvShow;
-      axios.get(apiurlTvShow, options).then((res) => {
-        store.tvShowList = res.data.results;
-      });
+      store.loading.tvShow = true;
+      axios
+        .get(apiurlTvShow, options)
+        .then((res) => {
+          store.tvShowList = res.data.results;
+          store.loading.tvShow = false;
+        })
+        .catch((error) => {
+          console.log(error);
+        });
     },
     getPopular() {
       let options = null;
@@ -61,15 +83,25 @@ export default {
 
       // chiamata api film popolari
       const apiurlPopularMovie = store.baseURL + store.endpoint.popularMovie;
-      axios.get(apiurlPopularMovie, options).then((res) => {
-        store.popularMovieList = res.data.results;
-      });
+      axios
+        .get(apiurlPopularMovie, options)
+        .then((res) => {
+          store.popularMovieList = res.data.results;
+        })
+        .catch((error) => {
+          console.log(error);
+        });
 
       // chiamata api serie tv popolari
       const apiurlPopularTvShow = store.baseURL + store.endpoint.popularTvShow;
-      axios.get(apiurlPopularTvShow, options).then((res) => {
-        store.popularTvShowList = res.data.results;
-      });
+      axios
+        .get(apiurlPopularTvShow, options)
+        .then((res) => {
+          store.popularTvShowList = res.data.results;
+        })
+        .catch((error) => {
+          console.log(error);
+        });
     },
   },
   created() {
