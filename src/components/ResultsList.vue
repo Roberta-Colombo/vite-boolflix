@@ -7,8 +7,8 @@
 
     <!-- Risultati ricerca film -->
     <div class="my-container">
-      <div v-if="store.errorMessage.movie">
-        La ricerca non ha prodotto risultati
+      <div class="text-white mt-5" v-if="store.errorMessage.movie">
+        Non esistono film con questo nome
       </div>
 
       <div v-if="!store.errorMessage.movie">
@@ -40,18 +40,28 @@
 
     <!-- Risultati ricerca serie -->
     <div class="my-container">
-      <h2>Serie che corrispondono alla tua ricerca</h2>
-      <div ref="box2" class="row g-0">
-        <button class="left-btn" @click="scrollLftShow">
-          <i class="fa-solid fa-angle-left"></i>
-        </button>
-        <div class="col" v-for="(item, index) in store.tvShowList" :key="index">
-          <CardComponent :searchResult="item" />
-        </div>
+      <div class="text-white" v-if="store.errorMessage.tvShow">
+        Non esistono serie con questo nome
       </div>
-      <button class="right-btn" @click="scrollRgtShow">
-        <i class="fa-solid fa-angle-right"></i>
-      </button>
+
+      <div v-if="!store.errorMessage.tvShow">
+        <h2>Serie che corrispondono alla tua ricerca</h2>
+        <div ref="box2" class="row g-0">
+          <button class="left-btn" @click="scrollLftShow">
+            <i class="fa-solid fa-angle-left"></i>
+          </button>
+          <div
+            class="col"
+            v-for="(item, index) in store.tvShowList"
+            :key="index"
+          >
+            <CardComponent :searchResult="item" />
+          </div>
+        </div>
+        <button class="right-btn" @click="scrollRgtShow">
+          <i class="fa-solid fa-angle-right"></i>
+        </button>
+      </div>
     </div>
   </section>
 </template>

@@ -47,17 +47,16 @@ export default {
           store.movieList = res.data.results;
           console.log(store.movieList.length);
           store.loading.movie = false;
+          // gestione nessun risultato trovato
+          if (store.movieList.length == 0) {
+            store.errorMessage.movie = true;
+          } else {
+            store.errorMessage.movie = false;
+          }
         })
         .catch((error) => {
           console.log(error);
         });
-
-      // Da correggere:
-      if ((store.movieList.length = 0)) {
-        store.errorMessage.movie = true;
-        console.log(store.movieList.length);
-        console.log("nessun risultato");
-      }
 
       // chiamata api per le serie
       const apiurlTvShow = store.baseURL + store.endpoint.tvShow;
@@ -67,6 +66,12 @@ export default {
         .then((res) => {
           store.tvShowList = res.data.results;
           store.loading.tvShow = false;
+          // gestione nessun risultato trovato
+          if (store.tvShowList.length == 0) {
+            store.errorMessage.tvShow = true;
+          } else {
+            store.errorMessage.tvShow = false;
+          }
         })
         .catch((error) => {
           console.log(error);
@@ -103,9 +108,30 @@ export default {
           console.log(error);
         });
     },
+    // getGenres() {
+    //   let options = null;
+    //   options = {
+    //     params: {
+    //       api_key: "843403d86580a9c697c8a3e94798c648",
+    //       language: "it-IT",
+    //     },
+    //   };
+
+    //   // chiamata api generi film
+    //   const apiurlGenresMovie = store.baseURL + store.endpoint.genreMovie;
+    //   axios
+    //     .get(apiurlGenresMovie, options)
+    //     .then((res) => {
+    //       store.genresList = res.data.genres;
+    //     })
+    //     .catch((error) => {
+    //       console.log(error);
+    //     });
+    // },
   },
   created() {
     this.getPopular();
+    // this.getGenres();
   },
 };
 </script>

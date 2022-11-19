@@ -7,11 +7,13 @@ export const store = reactive({
     tvShow: "/search/tv",
     popularMovie: "/movie/popular",
     popularTvShow: "/tv/popular",
+    genreMovie: "/genre/movie/list",
   },
   movieList: [],
   tvShowList: [],
   popularMovieList: [],
   popularTvShowList: [],
+  genresList: [],
   searchedTitle: "",
   showHome: true,
   loading: {
